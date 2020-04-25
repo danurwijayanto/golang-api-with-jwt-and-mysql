@@ -1,6 +1,6 @@
 package controllers
 
-import "github.com/fullstack/api/middlewares"
+import "github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/middlewares"
 
 func (s *Server) initializeRoutes() {
 

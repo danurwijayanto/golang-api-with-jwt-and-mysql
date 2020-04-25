@@ -3,7 +3,7 @@ package seed
 import (
 	"log"
 
-	"github.com/fullstack/api/models"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/models"
 	"github.com/jinzhu/gorm"
 )
 

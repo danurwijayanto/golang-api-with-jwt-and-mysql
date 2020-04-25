@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/fullstack/api/responses"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/responses"
 )
 
 func (server *Server) Home(w http.ResponseWriter, r *http.Request) {

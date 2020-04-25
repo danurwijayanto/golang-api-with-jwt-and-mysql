@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/fullstack/api/auth"
-	"github.com/fullstack/api/responses"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/auth"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/responses"
 )
 
 func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {

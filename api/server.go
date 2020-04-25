@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/fullstack/api/controllers"
-	"github.com/fullstack/api/seed"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/controllers"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/seed"
 	"github.com/joho/godotenv"
 )
 

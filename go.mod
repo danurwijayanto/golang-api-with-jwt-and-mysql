@@ -1,4 +1,4 @@
-module github.com/fullstack
+module github.com/danurwijayanto/golang-api-with-jwt-and-mysql
 
 go 1.14
 

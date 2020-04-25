@@ -5,10 +5,10 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/fullstack/api/auth"
-	"github.com/fullstack/api/models"
-	"github.com/fullstack/api/responses"
-	"github.com/fullstack/api/utils/formaterror"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/auth"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/models"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/responses"
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/utils/formaterror"
 	"golang.org/x/crypto/bcrypt"
 )
 
