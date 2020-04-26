@@ -43,7 +43,6 @@ func (u *User) Prepare() {
 	u.ID = 0
 	u.Nickname = html.EscapeString(strings.TrimSpace(u.Nickname))
 	u.Email = html.EscapeString(strings.TrimSpace(u.Email))
-	u.UserCategory = 0
 	u.CreatedAt = time.Now()
 	u.UpdatedAt = time.Now()
 }

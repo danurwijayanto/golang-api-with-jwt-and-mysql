@@ -3,6 +3,8 @@ package controllers
 import "github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/middlewares"
 
 func (s *Server) initializeRoutes() {
+	// Admin Subroute
+	admin := s.Router.PathPrefix("/admin").Subrouter()
 
 	// Home Route
 	s.Router.HandleFunc("/", middlewares.SetMiddlewareJSON(s.Home)).Methods("GET")
@@ -23,4 +25,7 @@ func (s *Server) initializeRoutes() {
 	s.Router.HandleFunc("/posts/{id}", middlewares.SetMiddlewareJSON(s.GetPost)).Methods("GET")
 	s.Router.HandleFunc("/posts/{id}", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(s.UpdatePost))).Methods("PUT")
 	s.Router.HandleFunc("/posts/{id}", middlewares.SetMiddlewareAuthentication(s.DeletePost)).Methods("DELETE")
+
+	// Product routes admin
+	admin.HandleFunc("/product", middlewares.SetMiddlewareAuthentication(s.CreateProduct)).Methods("POST")
 }

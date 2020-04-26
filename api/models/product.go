@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/danurwijayanto/golang-api-with-jwt-and-mysql/api/lib"
 	"github.com/jinzhu/gorm"
 )
 
@@ -19,12 +20,11 @@ type Product struct {
 	UpdatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
-func (p *Product) prepare() {
+func (p *Product) Prepare() {
 	p.ID = 0
 	p.Name = html.EscapeString(strings.TrimSpace(p.Name))
-	p.Stock = 0
+	p.Stock = lib.ConvertStockToZero(p.Stock)
 	p.Description = html.EscapeString(strings.TrimSpace(p.Description))
-	p.Price = 0
 	p.CreatedAt = time.Now()
 	p.UpdatedAt = time.Now()
 }
@@ -35,6 +35,12 @@ func (p *Product) Validate() error {
 	}
 	if p.Description == "" {
 		return errors.New("Required Description")
+	}
+	if p.Stock <= 0 {
+		return errors.New("Stock cannot empty or minus")
+	}
+	if p.Price <= 0 {
+		return errors.New("Price cannot empty or minus")
 	}
 	return nil
 }
