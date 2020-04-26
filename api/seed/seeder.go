@@ -33,13 +33,28 @@ var posts = []models.Post{
 	},
 }
 
+var product = []models.Product{
+	models.Product{
+		Name:        "Lobster",
+		Stock:       5,
+		Description: "Lobster Laut",
+		Price:       120000,
+	},
+	models.Product{
+		Name:        "Tongkol",
+		Stock:       10,
+		Description: "Tongkol Laut",
+		Price:       50000,
+	},
+}
+
 func Load(db *gorm.DB) {
 
-	err := db.Debug().DropTableIfExists(&models.Post{}, &models.User{}).Error
+	err := db.Debug().DropTableIfExists(&models.Post{}, &models.User{}, &models.Product{}).Error
 	if err != nil {
 		log.Fatalf("cannot drop table: %v", err)
 	}
-	err = db.Debug().AutoMigrate(&models.User{}, &models.Post{}).Error
+	err = db.Debug().AutoMigrate(&models.User{}, &models.Post{}, &models.Product{}).Error
 	if err != nil {
 		log.Fatalf("cannot migrate table: %v", err)
 	}
@@ -57,6 +72,11 @@ func Load(db *gorm.DB) {
 		posts[i].AuthorID = users[i].ID
 
 		err = db.Debug().Model(&models.Post{}).Create(&posts[i]).Error
+		if err != nil {
+			log.Fatalf("cannot seed posts table: %v", err)
+		}
+
+		err = db.Debug().Model(&models.Product{}).Create(&product[i]).Error
 		if err != nil {
 			log.Fatalf("cannot seed posts table: %v", err)
 		}

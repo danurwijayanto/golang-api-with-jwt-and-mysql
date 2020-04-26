@@ -61,14 +61,32 @@ func (p *Product) FindAllProduct(db *gorm.DB) (*[]Product, error) {
 	return &product, nil
 }
 
-func (p *Product) FindProductByID(db *gorm.DB, pid uint64) (*Post, error) {
-
+func (p *Product) FindProductByID(db *gorm.DB, pid uint64) (*Product, error) {
+	var err error
+	err = db.Debug().Model(&Product{}).Where("id = ?", pid).Take(&p).Error
+	if err != nil {
+		return &Product{}, err
+	}
+	return p, nil
 }
 
 func (p *Product) UpdateAProduct(db *gorm.DB) (*Product, error) {
-
+	var err error
+	err = db.Debug().Model(&Product{}).Where("id = ?", p.ID).Updates(Product{Name: p.Name, Stock: p.Stock, Description: p.Description, Price: p.Price, CreatedAt: time.Now()}).Error
+	if err != nil {
+		return &Product{}, err
+	}
+	return p, nil
 }
 
 func (p *Product) DeleteAProduct(db *gorm.DB, pid uint64) (int64, error) {
+	db = db.Debug().Model(&Product{}).Where("id = ?", pid).Take(&Product{}).Delete(&Product{})
 
+	if db.Error != nil {
+		if gorm.IsRecordNotFoundError(db.Error) {
+			return 0, errors.New("Product not found")
+		}
+		return 0, db.Error
+	}
+	return db.RowsAffected, nil
 }
